@@ -13,12 +13,26 @@ struct ContentView: View {
     var names = [ "Maria","Alberto","James","Leandro","Georgina"]
     var body: some View {
         List(self.countryList, id: \.id) {
-            country in Text (country.name)
-                .bold()
-                .font(.caption)
+            country in CellRow (country:country)
+        }
+
+           
+    
+}
+    
+    struct CellRow: View {
+        let country: Country
+        var body: some View {
+            VStack(alignment: .leading, spacing: 8){
+            Text (country.name)
+                .font(.title)
+                .foregroundColor(.gray)
+                Text("Pop:\(String(country.popullation))")
+                    .italic()
+                    .font(.headline)
+                    .foregroundColor(.pink)
         }
     }
-}
 
 struct Country: Identifiable {
     let id: Int
@@ -31,4 +45,6 @@ struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
     }
+}
+}
 }
